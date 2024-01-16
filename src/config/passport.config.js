@@ -46,6 +46,21 @@ const initializePassport = () => {
         usernameField: 'email'
     }, async (username,password,done) => {
         try{
+
+            //if superadmin
+            console.log(process.env.ADMIN_EMAIL)
+            if(username == process.env.ADMIN_EMAIL && password == process.env.ADMIN_PASSWORD){
+                console.log('superadmin logged')
+                const newUser = await UserModel.create({
+                    first_name : 'SuperAdmin',
+                    last_name: '',
+                    email: process.env.ADMIN_EMAIL,
+                    age: 1,
+                    password: ''
+                })
+                return done(null,newUser)
+            }
+
             const user = await  UserModel.findOne({email: username}).lean().exec()
             if(!user){
                 console.log('user not found')
