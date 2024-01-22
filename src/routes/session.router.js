@@ -18,7 +18,7 @@ router.post('/login', passport.authenticate('login', {failureRedirect: '/login'}
     console.log('logged in!')
 
     req.session.user = req.user
-    return res.redirect('/')
+    return res.redirect('/products')
 
 })
 
@@ -30,14 +30,14 @@ router.get('/githubcallback', passport.authenticate('github', {failureRedirect :
     req.session.user = req.user
 
     console.log('user session for github setted')
-    return res.redirect('/')
+    return res.redirect('/products')
 
 })
 
 
 router.post('/register', passport.authenticate('register', {failureRedirect: '/register'} ),  async (req, res) => {
     console.log('registered!')
-    return res.redirect('/')
+    return res.redirect('/products')
 })
 
 

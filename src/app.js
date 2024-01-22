@@ -3,6 +3,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import handlebars from 'express-handlebars'
 import viewsRouter from './routes/views.router.js'
+import cartRouter from './routes/cart.router.js'
+import productRouter from './routes/product.router.js'
 import sessionRouter from './routes/session.router.js'
 import __dirname from './utils.js'
 import { Server } from 'socket.io'
@@ -50,6 +52,8 @@ app.set('view engine', 'handlebars')
 
 
 app.use('/',viewsRouter)
+app.use('/products',productRouter)
+app.use('/carts',cartRouter)
 app.use('/api/session',sessionRouter)
 
 let httpServer = null
